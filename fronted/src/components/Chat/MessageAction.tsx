@@ -1,5 +1,5 @@
-import { createSignal, Show } from "solid-js"
-import type { Role } from "~/types"
+import { createSignal, Show } from "solid-js";
+import type { Role } from "~/types";
 
 export default function MessageAction({
   role,
@@ -9,23 +9,25 @@ export default function MessageAction({
   reAnswer,
   playAnswer
 }: {
-  role: Role
-  edit: () => void
-  del: () => void
-  copy: () => void
-  reAnswer: () => void
-  playAnswer: () => void
+  role: Role;
+  edit: () => void;
+  del: () => void;
+  copy: () => void;
+  reAnswer: () => void;
+  playAnswer: () => void;
 }) {
-  const [copied, setCopied] = createSignal(false)
+  const [play, SetPlay] = createSignal(false);
+  const [copied, setCopied] = createSignal(false);
+
   return (
     <div class="flex absolute items-center justify-between <sm:top--4 <sm:right-0 top-2 right-2 text-sm text-slate-7 dark:text-slate group-hover:opacity-100 group-focus:opacity-100 opacity-0 dark:bg-#292B32 bg-#E7EBF0 rounded">
       <Show when={role === "assistant"}>
         <ActionItem
           label="复制"
           onClick={() => {
-            setCopied(true)
-            copy()
-            setTimeout(() => setCopied(false), 1000)
+            setCopied(true);
+            copy();
+            setTimeout(() => setCopied(false), 1000);
           }}
           icon={copied() ? "i-un:copied" : "i-un:copy"}
         />
@@ -35,23 +37,30 @@ export default function MessageAction({
       </Show>
       <ActionItem label="重新回答" onClick={reAnswer} icon={"i-carbon:reset"} />
       <Show when={role === "assistant"}>
-        <ActionItem label="播放" onClick={playAnswer} icon={"i-carbon:play"} id="PlayAnswer"/>
+        <ActionItem
+          label="播放"
+          onClick={() => {
+              playAnswer()
+              SetPlay(!play())
+          }}
+          icon={play()?"i-carbon:pause":"i-carbon:play"}
+          id="PlaySwitch"
+        />
       </Show>
       <ActionItem label="删除" onClick={del} icon={"i-carbon:trash-can"} />
     </div>
-  )
+  );
 }
 
 function ActionItem(props: { onClick: any; icon: string; label?: string ;id?:string;}) {
   return (
     <div
       class="flex items-center cursor-pointer p-2 hover:bg-slate/10 rounded text-1.2em"
-      // 不能解构
       onClick={props.onClick}
       attr:tooltip={props.label}
       attr:position="top"
     >
       <button class={props.icon} id={props.id} title={props.label} />
     </div>
-  )
+  );
 }

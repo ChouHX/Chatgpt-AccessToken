@@ -5,6 +5,8 @@ interface ImportMetaEnv {
   CLIENT_MAX_INPUT_TOKENS?: string
   OPENAI_API_BASE_URL?: string
   OPENAI_API_KEY?: string
+  AZURE_SUBSCRIPTION_KEY?: string
+  AZURE_REGION?: string
   TIMEOUT?: string
   PASSWORD?: string
   SEND_KEY?: string

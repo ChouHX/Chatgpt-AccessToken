@@ -203,7 +203,6 @@ export default function () {
     }
     archiveCurrentMessage()
   }
-
   async function fetchGPT(messages: ChatMessage[]) {
     const response = await fetch("/api", {
       method: "POST",
@@ -261,7 +260,6 @@ export default function () {
       done = readerDone
     }
   }
-
   return (
     <main ref={containerRef!} class="mt-4">
       <MessageContainer

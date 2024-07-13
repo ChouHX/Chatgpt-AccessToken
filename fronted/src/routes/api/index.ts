@@ -36,6 +36,7 @@ export const config = {
 
 export const localKey = process.env.OPENAI_API_KEY || ""
 
+
 export const baseURL =
   process.env.NO_GFW !== "false"
     ? defaultEnv.OPENAI_API_BASE_URL
@@ -51,6 +52,7 @@ const timeout = isNaN(+process.env.TIMEOUT!)
 const passwordSet = process.env.PASSWORD || defaultEnv.PASSWORD
 
 export async function POST({ request }: APIEvent) {
+
   try {
     const body: {
       messages?: ChatMessage[]

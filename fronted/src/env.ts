@@ -31,11 +31,20 @@ export const defaultEnv = {
   } as Record<SimpleModel, number>,
   OPENAI_API_BASE_URL: "127.0.0.1:9000",
   OPENAI_API_KEY: "",
+  AZURE_SUBSCRIPTION_KEY:"",
+  AZURE_REGION:"southeastasia",
   TIMEOUT: 30000,
   PASSWORD: "",
   SEND_KEY: "",
   SEND_CHANNEL: 9,
   NO_GFW: false
+}
+
+export function getRegion(): string {
+  return process.env.AZURE_REGION!
+}
+export function getSubKey(): string {
+  return process.env.AZURE_REGION!
 }
 
 export type SessionSettings = typeof defaultEnv.CLIENT_SESSION_SETTINGS

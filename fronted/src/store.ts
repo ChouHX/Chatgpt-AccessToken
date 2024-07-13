@@ -8,6 +8,7 @@ import type { Model, Option, SimpleModel } from "~/types"
 import { countTokensInWorker } from "~/wokers"
 import { throttle } from "@solid-primitives/scheduled"
 
+
 let globalSettings = { ...defaultEnv.CLIENT_GLOBAL_SETTINGS }
 let _ = import.meta.env.CLIENT_GLOBAL_SETTINGS
 if (_) {

@@ -9,7 +9,6 @@ import vercel from "/assets/vercel.svg?raw"
 import type { FakeRoleUnion } from "./SettingAction"
 import { renderMarkdownInWorker } from "~/wokers"
 import { throttle } from "@solid-primitives/scheduled"
-import { playAudio } from "../speech/speech"
 
 interface Props {
   message: ChatMessage
@@ -73,10 +72,53 @@ export default function MessageItem(props: Props) {
     })
     props.sendMessage?.(question)
   }
-  function playAnswer() {
-    const [message, setMessage] = createSignal('');
-    setMessage(props.message.content);
-    playAudio(message(),store.globalSettings.Voice);
+  const [currentAudio, setCurrentAudio] = createSignal<HTMLAudioElement | null>(null);
+
+  async function playAnswer() {
+    try {
+      // 检查当前是否有音频正在播放
+      if (currentAudio() && !currentAudio().paused) {
+        // 如果有音频正在播放，暂停音频并返回 false
+        currentAudio().pause();
+        setCurrentAudio(null);
+        return false; // 中断函数执行
+      }
+
+      // 发起 PATCH 请求并获取响应
+      const response = await fetch('/api/tts', {
+        method: 'POST',
+        body: JSON.stringify({ message: props.message.content, voice: store.globalSettings.Voice }), // 根据实际需求传递消息和声音选项
+      });
+
+      // 确保响应成功
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // 将响应的音频数据转换为 ArrayBuffer
+      const audioData = await response.arrayBuffer();
+
+      // 创建新的 Audio 对象并播放音频
+      const newAudio = new Audio();
+      const blob = new Blob([audioData], { type: 'audio/mpeg' });
+      newAudio.src = URL.createObjectURL(blob);
+
+      // 监听音频播放结束事件，清除当前音频状态
+      newAudio.addEventListener('ended', () => {
+        setCurrentAudio(null);
+      });
+
+      // 播放新的音频
+      newAudio.play();
+
+      // 更新当前的音频状态
+      setCurrentAudio(newAudio);
+
+      return true; // 返回 true 表示播放新音频
+    } catch (error) {
+      console.error('Error playing audio:', error);
+      return false; // 播放失败时返回 false
+    }
   }
   function lockMessage() {
     if (props.index === undefined) return
