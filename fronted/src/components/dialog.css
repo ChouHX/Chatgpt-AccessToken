@@ -1,0 +1,31 @@
+#iframe-tips{
+    width: 100%;
+    height: 100%;
+}
+.solidDialog {
+    width: 75%;
+    height: 75%;
+    background: white;
+}
+
+.closeBtn{
+    position: absolute;
+    right: 5%;
+    bottom: 2%;
+    border: 1px solid black;
+
+    backdrop-filter: blur(6px);
+    padding: 1px 10px 1px 10px;
+    transition-duration: 0.5s;
+}
+
+.closeBtn:hover{
+    color: white;
+    background-color: black;
+}
+
+#Voice{
+    width: 150px;
+    text-align: center;
+    border: 0;
+}

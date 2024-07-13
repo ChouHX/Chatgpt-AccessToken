@@ -1,0 +1,87 @@
+{
+  "name": "chatgpt-vercel",
+  "version": "1.1.0",
+  "description": "Elegant and Powerful. Powered by OpenAI and Vercel",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsx scripts/genEnv.ts && solid-start dev",
+    "build": "tsx scripts/genEnv.ts && solid-start build",
+    "build:vps": "NODE_OPTIONS=\"--max-old-space-size=3072\" pnpm build",
+    "start": "solid-start start",
+    "lint:fix": "eslint . --fix --ext .ts",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --write ."
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "prettier --write",
+      "eslint --cache --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@solid-primitives/event-listener": "^2.3.3",
+    "@solid-primitives/media": "^2.2.8",
+    "@solid-primitives/resize-observer": "^2.0.25",
+    "@solid-primitives/scheduled": "^1.4.3",
+    "@solidjs/meta": "^0.29.3",
+    "@solidjs/router": "^0.8.4",
+    "@unocss/reset": "^0.57.7",
+    "ant-design-vue": "4.x",
+    "array-keyed-map": "^2.1.3",
+    "dompurify": "^3.1.6",
+    "element-plus": "^2.7.6",
+    "eventsource-parser": "^1.1.2",
+    "fzf": "^0.5.2",
+    "highlight.js": "^11.9.0",
+    "html-to-image": "^1.11.11",
+    "katex": "^0.16.9",
+    "markdown-it": "^13.0.2",
+    "markdown-it-highlightjs": "^4.0.1",
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-kbd": "^2.2.2",
+    "microsoft-cognitiveservices-speech-sdk": "^1.38.0",
+    "solid-dialog": "^0.3.0",
+    "solid-js": "^1.8.15",
+    "solid-start": "^0.3.10",
+    "solid-transition-group": "^0.2.3",
+    "undici": "^5.28.3"
+  },
+  "devDependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.1",
+    "@iconify-json/carbon": "^1.1.31",
+    "@iconify-json/ri": "^1.1.20",
+    "@types/markdown-it": "^13.0.7",
+    "@types/node": "^20.11.28",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vercel/node": "^3.0.23",
+    "esbuild": "^0.19.12",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "sass": "^1.77.7",
+    "simple-git-hooks": "^2.10.0",
+    "solid-start-cloudflare-workers": "^0.3.10",
+    "solid-start-netlify": "^0.3.10",
+    "solid-start-node": "^0.3.10",
+    "solid-start-vercel": "^0.3.10",
+    "tsx": "^3.14.0",
+    "typescript": "^5.4.2",
+    "unocss": "^0.57.7",
+    "vite": "^4.5.2",
+    "vite-plugin-markdown": "^2.2.0",
+    "vite-plugin-pwa": "^0.16.7",
+    "workbox-window": "^7.0.0"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "engines": {
+    "node": ">20.0.0"
+  }
+}
