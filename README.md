@@ -3,10 +3,10 @@
 
 ### 快速开始
 - web
-参考 chatgpt-vercel [README.md](.//README.md)
+参考 chatgpt-vercel [README.md](fronted/README.md)
 ⚠ 基于chatgpt-vercel项目 .env 添加了<code>AZURE_SUBSCRIPTION_KEY</code> 和 <code>AZURE_REGION</code>
 - proxy
-参考 openai-proxy [README.md](./openai-proxy/README.md)
+参考 openai-proxy [README.md](openai-proxy/README.md)
 
 ### 参考项目
 - [chatgpt-vercel](https://github.com/ourongxing/chatgpt-vercel)。
